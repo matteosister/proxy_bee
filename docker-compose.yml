@@ -1,0 +1,18 @@
+bee:
+  build: .
+  volumes:
+    - .:/code
+    - "~/.ssh:/root/.ssh"
+    - "~/.aws:/root/.aws"
+  working_dir: /code
+  ports:
+    - 4002:4000
+  links:
+    - api
+
+api:
+  image: clue/json-server
+  volumes:
+    - "./test/resources:/data"
+  ports:
+    - 8080:80
